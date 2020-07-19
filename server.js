@@ -14,9 +14,20 @@ app.post('/persons', async function (req, res) {
 	res.json(person);
 });
 
+app.put('/persons/:idPerson', async function (req, res) {
+	const idPerson = req.params.idPerson;
+	const person = await service.updatePerson(idPerson, req.body);
+	res.json(person);
+});
+
 app.post('/donations', async function (req, res) {
 	const donation = await service.saveDonation(req.body);
 	res.json(donation);
+});
+
+app.delete('/donations/:idDonation', async function (req, res) {
+	await service.deleteDonation(req.params.idDonation);
+	res.end();
 });
 
 app.get('/statistics', async function (req,res) {
